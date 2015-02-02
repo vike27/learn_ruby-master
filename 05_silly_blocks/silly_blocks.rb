@@ -1,21 +1,23 @@
-def reverser
-k = []
-  x = yield.split(" ")
-  x.each do |y|
-  	n = y.reverse
-  k.push(n)
+def reverser(&block)
+	y = []
+ 	x = block.call.split
+ 	x.each do |n|
+ 		y << n.reverse!
+ 	end
+y.join(" ")
 end
 
-m = k.join(" ")
-m
+def adder(n=1,&block)
+	yield + n
 end
 
-def adder(num=1, &block)
-  block.call + num
+def repeater(n=0, &block)
+	 if n == 0
+	 	yield
+	 else 
+	 	n.times do  |n|
+	 		yield
+	 	end
+	 end
 end
 
-def repeater(num=1, &block)
-	for i in (1..num) do
-		block.call
-	end
-end

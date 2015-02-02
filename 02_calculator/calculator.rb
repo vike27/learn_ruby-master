@@ -1,17 +1,23 @@
-def add(x, y)
-	x + y
+def add(n, m)
+	n + m
 end
 
-def subtract(x, y)
-	x - y
+def subtract(n, m)
+	n - m
 end
 
-def sum(z)
-n = 0
-i = 0
-	while i < z.count  
-		n = z[i] + n
-	i += 1
+def sum(arr)
+	total = 0
+	arr.each do |x|
+		total = total + x
 	end
-n
+total
+end
+
+def multiply(*args)
+	total = 1
+	args.each do |x|
+		total = total * x
+	end
+total
 end

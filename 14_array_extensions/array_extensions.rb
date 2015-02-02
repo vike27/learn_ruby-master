@@ -1,16 +1,33 @@
-
 class Array
-  def sum
-    self.length == 0 ? 0 : self.reduce(:+) 
-  end
-
-  def square
-    self.length == 0 ? self : self.map { |n| n*n }    
-  end
-
-  def square!
-    sq = square
-    self.clear.concat(sq)
-  end
-
+	def sum
+		 if self.empty?
+			0
+		 else
+			 y=0
+			self.each do |x|
+			y+=x
+			end
+			y
+		 end
+	end
+	
+	def square
+		y=0
+		 if self.empty?
+			[]
+		else
+			self.collect do |x|
+			x**2
+			end
+		end
+	end
+	
+	def square!
+		self.collect! do |x|
+		x**2
+		end
+		
+	end
+	
 end
+	

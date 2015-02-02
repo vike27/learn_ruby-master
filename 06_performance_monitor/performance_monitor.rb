@@ -1,16 +1,12 @@
-def measure(number = 1)  
-  counter = number  
-  total = 0  
-  while counter > 0  
-  start = Time.now  
-  counter-=1  
-
-yield
-
- stop = Time.now
- total = total + (stop - start)
-
+def measure(n=1,&block)
+	x = Time.now
+	n.times do 
+		yield
+	end
+	y = Time.now
+	if n == 1
+		return (y - x)
+	else
+		return ((y - x)/n)
+	end
 end
-
- total / number
-end  

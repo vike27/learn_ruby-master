@@ -1,25 +1,26 @@
 class Book
-  def title
-    @title
-  end
 
+  def title()
+  @title
+  end
+  
   def title=(title)
-  special_words = %w(and in the of a an)
-  formatted_title = []
-
-    @title = title.split.each_with_index do |w,i|
-      case 
-      when i == 0
-        formatted_title << w.capitalize
-
-      when i > 0 && !special_words.include?(w)
-        formatted_title << w.capitalize
-
-      when special_words.include?(w)
-        formatted_title << w
-      end
-    end
-
-  @title = formatted_title.join(" ")
+  @title=capitalize_input(title)
   end
+  
+  def capitalize_input(title)
+  a=["the","a","an","and","in","of"]
+  y=[]
+  x=title.split(" ")
+    x.each do |x| 
+    x.capitalize! unless a.include?(x)
+    y << x
+    end
+    y[0].capitalize!
+    return y.join(" ")
+  end
+  
+
+  
+
 end

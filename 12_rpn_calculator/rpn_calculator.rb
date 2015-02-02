@@ -1,81 +1,87 @@
-class RPNCalculator 
-  def initialize
-    @stack = [0]    
-  end
+class RPNCalculator
 
+attr_accessor :calculator
 
-  def value
-    @stack.last
-  end
+	def initialize()
+		@calculator=[]
+	end
+	
+	def push(x)
+		@calculator << x
+	end
+	
+	def value
+		@calculator.last
+	end
+	
+	def plus
+			if @calculator.size>=2
+			sum=@calculator.pop + @calculator.pop
+			@calculator << sum
+		else
+			raise "calculator is empty"
+		end
+	end
 
-
-  def pop
-    n = @stack.pop
-    raise "calculator is empty" if n.nil?  # unless n
-    return n
-  end
-
-
-  def push(n=@value)  
-    @stack.push(n)
-  end
-
-
-  def plus
-    first = pop
-    second = pop
-    push(first + second)    
-  end
-
-
-  def minus
-    subtractant = pop
-    push(pop - subtractant)    
-  end
-
-
-  def divide
-    divisor = pop
-    push(pop.to_f / divisor.to_f)    
-  end
-
-
-  def times
-    push(pop * pop)    
-  end
-
-
-  def tokens(str)
-    operators = [ '+', '-', '*', '/' ]
-
-    str.split(' ').map { |e| 
-      e = operators.include?(e) ? e.to_sym : e.to_i
-    }
-  end
-
-
-  def evaluate(str)
-    nonNumbers = [ '+', '-', '*', '/', ' ' ]
-
-    len = str.length
-    i = 0
-    while i < len 
-      if nonNumbers.include?(str[i]) 
-        case str[i]
-        when '+' then plus
-        when '-' then minus
-        when '*' then times
-        when '/' then divide
-        else
-          #do nothing in case of space character
-        end
-      else
-        # number encountered, push it on stack
-        push(str[i].to_i)
-      end
-      i += 1
-    end
-    value
-  end
-
+	def minus
+			if @calculator.size>=2
+			sec=@calculator.pop
+			first=@calculator.pop
+			diff=first-sec
+			@calculator << diff
+		else
+			raise "calculator is empty"
+		end
+	end
+	
+	def divide
+			if @calculator.size>=2
+			x1=@calculator.pop.to_f
+			x2=@calculator.pop.to_f
+			x3=x2 / x1
+			@calculator << x3
+		else
+			raise "calculator is empty"
+		end
+	end
+	
+	def times
+		if @calculator.size>=2
+			x=@calculator.pop.to_f
+			y=@calculator.pop.to_f
+			z=x * y
+			@calculator << z
+		else
+			raise "calculator is empty"
+		end
+	end
+	
+	def tokens(x)
+		arr=x.split(" ")
+		y=arr.collect do |a|
+			if (a== "+" || a== "-" || a== "*" || a== "/")
+			 a.to_sym
+			 else
+			 a.to_i
+		    end
+		end
+		y
+	end
+	
+	def evaluate(y)
+		 tokens(y).each do |s|
+			if s==:+
+			 self.plus
+			elsif s==:-
+			self.minus
+			elsif s==:/
+			self.divide
+			elsif s==:*
+			self.times
+			else
+			self.push(s)
+			end
+		end
+		self.value
+	end	
 end

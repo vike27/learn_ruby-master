@@ -78,15 +78,17 @@ end
 # write tests and code for the following:
 
 describe "#multiply" do
+  it "multiplies two numbers" do 
+    multiply(2,3).should == 6
+  end
 
-  it "multiplies two numbers"
-
-  it "multiplies several numbers"
-
+  it "multiplies several numbers" do
+    multiply(2,3,4).should == 24
+  end
 end
 
 describe "#power" do
-  it "raises one number to the power of another number"
+  it "raises one number to the power of another number" do
 end
 
 # http://en.wikipedia.org/wiki/Factorial
@@ -96,4 +98,5 @@ describe "#factorial" do
   it "computes the factorial of 2"
   it "computes the factorial of 5"
   it "computes the factorial of 10"
+end
 end
